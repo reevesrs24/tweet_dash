@@ -12,7 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
     <style>
@@ -26,7 +26,7 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">Tweet Dash</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -46,14 +46,13 @@
     </nav>
 
     <main role="main" id="vue-div">
-
       <!-- Main jumbotron for a primary marketing message or call to action -->
 {% verbatim %}
 
-      <div class="container" style="margin-top: 8em">
+      <div class="container" style="margin-top: 8em;">
         <!-- Example row of columns -->
-        <div class="row">
-                <ul class="nav nav-pills nav-fill">
+        <div class="row" style="padding-bottom: 2em">
+                <ul class="nav  nav-pills nav-fill">
                     <li class="nav-item active" v-on:click="toggleActiveDay">
                         <a class="nav-link" v-bind:class="{ active: isActiveMon }" v-on:click="type = 'Mon'" href="#">Monday</a>
                     </li>
@@ -77,33 +76,315 @@
                     </li>
                 </ul>
         </div> <!-- /container -->
-  
-    
-        <div v-if="type == 'Mon'" id="monday">
-            <p>Monday</p>
+        {% endverbatim %}
+        {% verbatim %}
+        <div class="col-md-6 offset-3" style="" v-if="type == 'Mon'" id="monday">
+        {% endverbatim %}
+            {% for tweet in tweets %}
+            {% if tweet.day == 'Monday' %}
+            <tr>
+                    <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                    <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                    <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                    <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                    {% if tweet.thread|length > 1 %}
+                    <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                    {% endif %}
+                    <p></p>
+                </tr>
+            {% endif %}
+            <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
         </div>
-        <div v-if="type == 'Tues'"id="tuesday">
-            <p>Tuesday</p>
+        {% verbatim %}
+        <div class="col-md-6 offset-3"  v-if="type == 'Tues'" id="tuesday">
+                {% endverbatim %}
+                {% for tweet in tweets %}
+                {% if tweet.day == 'Tuesday' %}
+                <tr>
+                        <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                        {% if tweet.thread|length > 1 %}
+                        <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                        {% endif %}
+                        <p></p>
+                    </tr>
+                {% endif %}
+                  <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
         </div>
-        <div v-if="type == 'Wed'" id="wednesday">
-            <p>Wednesday</p>
+        {% verbatim %}
+        <div class="col-md-6 offset-3" v-if="type == 'Wed'" id="wednesday">
+                {% endverbatim %}
+                {% for tweet in tweets %}
+                {% if tweet.day == 'Wednesday' %}
+                <tr>
+                        <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                        {% if tweet.thread|length > 1 %}
+                        <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                        {% endif %}
+                        <p></p>
+                    </tr>
+                {% endif %}
+                 <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
         </div>
-        <div v-if="type == 'Thurs'" class="" id="thursday">
-            <p>Thursday</p>
+        {% verbatim %}
+        <div class="col-md-6 offset-3" v-if="type == 'Thurs'" class="" id="thursday">
+                {% endverbatim %}
+                {% for tweet in tweets %}
+                {% if tweet.day == 'Thursday' %}
+                <tr>
+                        <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                        {% if tweet.thread|length > 1 %}
+                        <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                        {% endif %}
+                        <p></p>
+                    </tr>
+                {% endif %}
+                <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
         </div>
-        <div v-if="type == 'Fri'" class="" id="friday">
-            <p>Friday</p>
+        {% verbatim %}
+        <div class="col-md-6 offset-3" v-if="type == 'Fri'" class="" id="friday">
+                {% endverbatim %}
+                {% for tweet in tweets %}
+                {% if tweet.day == 'Friday' %}
+                <tr>
+                        <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                        {% if tweet.thread|length > 1 %}
+                        <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                        {% endif %}
+                        <p></p>
+                    </tr>
+                {% endif %}
+               
+            <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                 <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
         </div>
-        <div v-if="type == 'Sat'" class="" id="saturday">
-            <p>Saturday</p>
+        {% verbatim %}
+        <div class="col-md-6 offset-3" v-if="type == 'Sat'" class="" id="saturday">
+                {% endverbatim %}
+                {% for tweet in tweets %}
+                {% if tweet.day == 'Saturday' %}
+                <tr>
+                        <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                        <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                        {% if tweet.thread|length > 1 %}
+                        <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                        {% endif %}
+                        <p></p>
+                    </tr>
+                {% endif %}
+                 <!-- Modal -->
+            <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role ="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                {% for t in tweet.thread %}
+                                    <p style="font-family: Helvetica Neue">{{ t }}</p>
+                                {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
         </div>
-        <div v-if="type == 'Sun'" class="" id="sunday">
-            <p>Sunday</p>
+        {% verbatim %}
+        <div class="col-md-6 offset-3" v-if="type == 'Sun'" class="" id="sunday">
+        {% endverbatim %}
+        {% for tweet in tweets %}
+        {% if tweet.day == 'Sunday' %}
+        <tr>
+                <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
+                <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
+                <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
+                <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
+                {% if tweet.thread|length > 1 %}
+                <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><a href="#"><i class="fa fa-angle-down fa-lg" aria-hidden="true"  data-toggle="modal" data-target="#{{ tweet.id }}"></i></a></p>
+                {% endif %}
+                <p></p>
+            </tr>
+        {% endif %}
+         <!-- Modal -->
+         <div class="modal fade" id="{{ tweet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role ="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{tweet.date}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                            {% for t in tweet.thread %}
+                                <p style="font-family: Helvetica Neue">{{ t }}</p>
+                            {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 </div>
 </main>
 
-{% endverbatim %}
+
+
 <!--
     <footer class="footer navbar-fixed-bottom">
       <p>&copy; Company 2017</p>
@@ -117,6 +398,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.27/vue.js"></script>        
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script>
         var app = function() {
@@ -131,6 +413,7 @@
                 self.vue.isActiveSat = (self.vue.type == 'Sat') ? true : false;
                 self.vue.isActiveSun = (self.vue.type == 'Sun') ? true : false;
             }
+            
 
             self.vue = new Vue({
                 el: "#vue-div",
@@ -157,6 +440,8 @@
         // This will make everything accessible from the js console;
         // for instance, self.x above would be accessible as APP.x
         jQuery(function(){APP = app();});
+   
+
     </script>
 </body>
 
