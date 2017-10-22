@@ -46,10 +46,14 @@
     </nav>
 
     <main role="main" id="vue-div">
+        <div class="col-md-6 offset-4" style="padding-top: 6em">
+            <img style="height: 6em; width: 6em; border-radius: 40%"src="https://alexanderjuanantoniocortes.com/images/cortes.jpg">
+            <h4 style="font-family: Helvetica Neue; display:inline; font-weight: bold; padding-left: 1em">Alexander J.A Cortes</h4>
+        </div>
       <!-- Main jumbotron for a primary marketing message or call to action -->
 {% verbatim %}
 
-      <div class="container" style="margin-top: 8em;">
+      <div class="container" style="margin-top: 2em;">
         <!-- Example row of columns -->
         <div class="row" style="padding-bottom: 2em">
                 <ul class="nav  nav-pills nav-fill">
@@ -83,13 +87,14 @@
             {% for tweet in tweets %}
             {% if tweet.day == 'Monday' %}
             <div style="cursor: pointer;" data-toggle="modal" data-target="#{{ tweet.id }}">
+            
             <tr>
                     <p style="font-family: Helvetica Neue">{{ tweet.leading_tweet }}</p>
                     <p style="font-family: Helvetica Neue; display:inline">{{ tweet.date }}</p>
                     <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                     <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                     {% if tweet.thread|length > 1 %}
-                    <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                    <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                     <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                     {% endif %}
                     <p></p>
@@ -133,7 +138,7 @@
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                             {% if tweet.thread|length > 1 %}
-                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                             <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                             {% endif %}
                             <p></p>
@@ -177,7 +182,7 @@
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                             {% if tweet.thread|length > 1 %}
-                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                             <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                             {% endif %}
                             <p></p>
@@ -222,7 +227,7 @@
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                             {% if tweet.thread|length > 1 %}
-                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                             <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                             {% endif %}
                             <p></p>
@@ -266,7 +271,7 @@
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                             {% if tweet.thread|length > 1 %}
-                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                             <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                             {% endif %}
                             <p></p>
@@ -310,7 +315,7 @@
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                             <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                             {% if tweet.thread|length > 1 %}
-                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                            <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                             <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                             {% endif %}
                             <p></p>
@@ -354,7 +359,7 @@
                     <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-retweet" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.likes }}</p>
                     <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-heart-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.retweets }}</p>
                     {% if tweet.thread|length > 1 %}
-                    <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
+                    <p style="font-family: Helvetica Neue; display:inline; padding-left: 3em; color: #1DA1F2"><i class="fa fa-comment-o" aria-hidden="true" style="padding-right: .5em"></i>{{ tweet.thread|length }}</p>                
                     <p style="font-family: Helvetica Neue; display:inline; position:absolute; right:0"><i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></p>
                     {% endif %}
                     <p></p>
