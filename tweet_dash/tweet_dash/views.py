@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from firebase import firebase
+import requests
 import time
 import datetime
 
 def index(request):
-    f = firebase.FirebaseApplication('https://tweet-dash.firebaseio.com', None)
-    result = f.get('/tweet-dash', None)
+    #f = firebase.FirebaseApplication('https://tweet-dash.firebaseio.com', None)
+    #result = f.get('/tweet-dash', None)
+    r = requests.get('https://tweet-dash.firebaseio.com/tweet-dash.json')
+    result = r.json()
     tweets = []
     for res in result.values():
       timestamp = time.mktime(time.strptime(res['date'], '%Y-%m-%d %H:%M:%S'))
